@@ -1,0 +1,72 @@
+
+type Query{
+    "List of students in the online academy"
+    students: [Student!]!
+    "Complete student information by ID"
+    student(id: ID!): Student! 
+    "List of course in the online academy"
+    courses: [Course!]!
+    "Complete course information by ID"
+    course(id: ID!): Course!
+}
+
+type Mutation{
+    "Create a new course in the database"
+    newCourse(course: CourseInput!): Course!
+    "Update an existing course"
+    updateCourse(course: CourseInput!): Course!
+    "Delete existing course by ID"
+    deleteCourse(id: ID!): Course!
+}
+
+input CourseInput {
+    id: ID
+    title: String!
+    description: String!
+    clases: Int!
+    time: Float!
+    logo: String!
+    level: Level=ALL
+    path: String!
+    teacher: String!
+}
+
+"Information about a student"
+type Student{
+    id: ID!
+    name: String!
+    email: String!
+    site: String
+    courses: [Course!]!
+}
+
+"Information about a Course"
+type Course{
+    id: ID!
+    title: String!
+    description: String!
+    clases: Int!
+    time: Float!
+    logo: String!
+    level: Level!
+    path: String!
+    teacher: String!
+    students: [Student]
+    reviews: [Review]
+}
+
+"Enumerator - Level of complexity of the course"
+enum Level{
+    ALL
+    BEGGINER
+    MEDIUM
+    EXPERT
+}
+
+"Indicating the comments and qualification of the course"
+type Review{
+    id: ID!
+    name: String!
+    points: Float!
+    comments: String
+}
