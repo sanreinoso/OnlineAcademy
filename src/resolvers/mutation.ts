@@ -50,7 +50,7 @@ const mutation: IResolvers = {
                 database.courses[exist] = course ;
                 return course;
             }
-            return messageCourse('No se puede actualizar este curso porque NO existe!')
+            return messageCourse('No se puede actualizar este curso porque NO existe!');
         },
         deleteCourse(__: void, { id }):any {
             const deleteCourse = _.remove(database.courses, function(course){
